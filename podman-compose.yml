@@ -1,0 +1,26 @@
+version: "3"
+services:
+  service-a:
+    build: ./service-a
+    image: bosch-service-a:latest
+    container_name: bosch-service-a
+    ports:
+      - "3000:8080"
+    networks:
+      - boschprojects
+    environment:
+      PORT: 8080
+      SERVICE_B_HOST: service-b
+      SERVICE_B_PORT: 8080
+  service-b:
+    build: ./service-b
+    image: bosch-service-b:latest
+    container_name: bosch-service-b
+    ports:
+      - "3001:8080"
+    networks:
+      - boschprojects
+    environment:
+      PORT: 8080
+networks:
+  boschprojects: {}
